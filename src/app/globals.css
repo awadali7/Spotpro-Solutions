@@ -434,3 +434,35 @@
     transition-duration: 110ms;
   }
 }
+
+/* Meteor shower (`Meteors` in components/ui). A meteor is invisible until its
+   animation runs — including during its start delay — so under reduced motion
+   the cards are simply plain rather than dotted with frozen streaks. The inline
+   animation-delay/duration on each meteor override the shorthand's defaults. */
+@keyframes meteor {
+  0% {
+    transform: rotate(215deg) translateX(0);
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(215deg) translateX(-500px);
+    opacity: 0;
+  }
+}
+
+.meteor {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .meteor {
+    animation: meteor 5s linear infinite;
+  }
+}
+
+:root[data-motion="on"] .meteor {
+  animation: meteor 5s linear infinite;
+}

@@ -1,7 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { AuroraBackground } from "@/components/ui/aurora-background";
-import { WobbleCard } from "@/components/ui/wobble-card";
 import { HeroScene } from "@/components/HeroScene";
 import { ScrollHighlightText } from "@/components/ScrollHighlightText";
 import { WorkCarousel } from "@/components/WorkCarousel";
@@ -9,8 +8,7 @@ import { HeroFlip } from "@/components/HeroFlip";
 import { RevealSection } from "@/components/RevealSection";
 import { SectionHeading } from "@/components/SectionHeading";
 import { CtaBand } from "@/components/CtaBand";
-import { expertiseIcons } from "@/components/icons";
-import { cn } from "@/lib/utils";
+import { ExpertiseCard } from "@/components/ExpertiseCard";
 import { expertiseAreas } from "@/lib/content/expertise";
 import { whoWeAre } from "@/lib/content/about";
 import { heroEyebrow, heroFlipPhrases } from "@/lib/content/home";
@@ -120,32 +118,18 @@ export default function HomePage() {
             title="Four disciplines, one integrated team"
             description="We bring machine learning, blockchain, language models, and data engineering together under one roof."
           />
-          <div className="mt-12 grid grid-cols-1 gap-4 lg:grid-cols-3">
-            {expertiseAreas.map((area, index) => {
-              const Icon = expertiseIcons[area.icon];
-              // First and fourth run wide, so four cards tile two full rows
-              // of three columns with no ragged edge.
-              const wide = index === 0 || index === 3;
-              return (
-                <WobbleCard
-                  key={area.slug}
-                  containerClassName={cn(
-                    "min-h-[16rem]",
-                    wide ? "lg:col-span-2" : "lg:col-span-1",
-                  )}
-                  className="flex h-full flex-col justify-end"
-                >
-                  <Icon className="text-highlight mb-5 h-9 w-9" aria-hidden="true" />
-                  <h3 className="font-heading text-xl font-semibold text-balance text-white">
-                    {area.title}
-                  </h3>
-                  <p className="mt-2 max-w-md text-sm leading-relaxed text-pretty text-white/75">
-                    {area.summary}
-                  </p>
-                </WobbleCard>
-              );
-            })}
-          </div>
+          <ul className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {expertiseAreas.map((area, index) => (
+              // First and fourth run wide at lg, so four cards tile two full
+              // rows of three columns with no ragged edge; md is a plain 2x2.
+              <ExpertiseCard
+                key={area.slug}
+                area={area}
+                wide={index === 0 || index === 3}
+                seed={index}
+              />
+            ))}
+          </ul>
 
           <div className="mt-10 text-center">
             <Link

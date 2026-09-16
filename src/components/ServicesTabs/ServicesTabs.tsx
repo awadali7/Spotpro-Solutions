@@ -5,6 +5,7 @@ import { Check } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { serviceIcons } from "@/components/icons";
+import { cn } from "@/lib/utils";
 import { services } from "@/lib/content/services";
 
 export function ServicesTabs() {
@@ -12,7 +13,17 @@ export function ServicesTabs() {
     <Tabs defaultValue={services[0].slug} className="gap-8">
       <TabsList
         variant="line"
-        className="h-auto w-full flex-wrap justify-start gap-2 overflow-x-auto p-0"
+        className={cn(
+          // The vendor list is fixed at h-8 through a group variant, which a
+          // plain `h-auto` can't beat — and with overflow set, anything past
+          // 32px was clipped out of sight.
+          "w-auto justify-start gap-2 p-1 group-data-horizontal/tabs:h-auto",
+          // Below md: one swipeable row bleeding to the screen edge, so the
+          // cut-off pill signals there is more.
+          "-mx-4 overflow-x-auto scroll-px-4 px-4 [scrollbar-width:thin] sm:-mx-6 sm:scroll-px-6 sm:px-6",
+          // md–lg: an even 3x2 grid. xl: one centred row under the heading.
+          "md:mx-0 md:grid md:grid-cols-3 md:overflow-visible md:px-1 xl:flex xl:flex-wrap xl:justify-center",
+        )}
       >
         {services.map((service) => {
           const Icon = serviceIcons[service.icon];
@@ -20,7 +31,18 @@ export function ServicesTabs() {
             <TabsTrigger
               key={service.slug}
               value={service.slug}
-              className="border-border data-active:border-accent data-active:text-accent-ink h-auto flex-none gap-2 rounded-full border px-4 py-2"
+              // Browsers leave a partly visible element where it is when it
+              // takes focus, so arrowing or tapping to an edge pill left it
+              // cut off in the mobile strip. `nearest` is a no-op when the
+              // pill is already fully in view (always, from md up). The strip
+              // deliberately has no scroll-snap: snapping overrode this
+              // scroll and pulled the pill back off-screen.
+              onFocus={(event) =>
+                event.currentTarget.scrollIntoView({ block: "nearest", inline: "nearest" })
+              }
+              // after:hidden drops the line variant's underline bar, which sat
+              // 5px under the active pill.
+              className="border-border data-active:border-accent data-active:text-accent-ink h-auto flex-none gap-2 rounded-full border px-4 py-2 after:hidden"
             >
               <Icon className="h-4 w-4" />
               {service.title}

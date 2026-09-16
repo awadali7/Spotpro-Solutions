@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
 import { RevealSection } from "@/components/RevealSection";
 import { CtaBand } from "@/components/CtaBand";
+import { ExpertiseCard } from "@/components/ExpertiseCard";
 import { Button } from "@/components/ui/button";
-import { expertiseIcons } from "@/components/icons";
 import { expertiseAreas } from "@/lib/content/expertise";
 
 export const metadata: Metadata = {
@@ -23,27 +23,11 @@ export default function ExpertisePage() {
       />
 
       <RevealSection as="section" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {expertiseAreas.map((area) => {
-            const Icon = expertiseIcons[area.icon];
-            return (
-              <li
-                key={area.slug}
-                id={area.slug}
-                className="group border-border bg-card hover:border-accent/60 relative scroll-mt-24 overflow-hidden rounded-2xl border p-7 transition-all hover:shadow-lg"
-              >
-                <span
-                  className="bg-brand-gradient absolute inset-x-0 top-0 h-1 scale-x-0 transition-transform duration-300 group-hover:scale-x-100"
-                  aria-hidden="true"
-                />
-                <div className="bg-accent/10 text-accent-ink flex h-12 w-12 items-center justify-center rounded-xl">
-                  <Icon className="h-6 w-6" />
-                </div>
-                <h2 className="font-heading text-h3 mt-5 font-semibold">{area.title}</h2>
-                <p className="text-muted-foreground mt-3 text-pretty">{area.description}</p>
-              </li>
-            );
-          })}
+        {/* Four areas: a 2x2 grid, so no card is left orphaned on its own row. */}
+        <ul className="grid gap-6 md:grid-cols-2">
+          {expertiseAreas.map((area, index) => (
+            <ExpertiseCard key={area.slug} area={area} variant="detail" seed={index} />
+          ))}
         </ul>
 
         <div className="mt-14 text-center">
