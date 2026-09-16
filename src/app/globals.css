@@ -1,26 +1,436 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-general-sans), var(--font-inter), ui-sans-serif, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+
+  /* Brand tokens beyond shadcn's base set */
+  --color-highlight: var(--highlight);
+  --color-highlight-foreground: var(--highlight-foreground);
+  --color-accent-ink: var(--accent-ink);
+  --color-highlight-ink: var(--highlight-ink);
+  --color-navy: var(--navy);
+  --color-navy-foreground: var(--navy-foreground);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* Fluid type scale */
+  --text-hero: clamp(2.75rem, 2.1rem + 3vw, 4.75rem);
+  --text-display: clamp(2.25rem, 1.8rem + 2.2vw, 3.5rem);
+  --text-h1: clamp(2rem, 1.7rem + 1.4vw, 2.75rem);
+  --text-h2: clamp(1.5rem, 1.3rem + 1vw, 2.25rem);
+  --text-h3: clamp(1.25rem, 1.15rem + 0.5vw, 1.625rem);
+  --text-lead: clamp(1.05rem, 1rem + 0.3vw, 1.3rem);
+
+  --animate-aurora: aurora 60s linear infinite;
+  --animate-reveal-up: reveal-up 0.6s ease-out both;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  /* Neutral surface */
+  --background: oklch(0.99 0.002 260);
+  --foreground: #0b1220;
+  --card: oklch(1 0 0);
+  --card-foreground: #0b1220;
+  --popover: oklch(1 0 0);
+  --popover-foreground: #0b1220;
+
+  /* Brand palette */
+  --primary: #2f39a9;
+  --primary-foreground: #ffffff;
+  --secondary: #2e6fa0;
+  --secondary-foreground: #ffffff;
+  --accent: #49a4bb;
+  --accent-foreground: #0b1220;
+  --highlight: #15d8b3;
+  --highlight-foreground: #0b1220;
+
+  /* Text-safe variants: clear 4.5:1 against every light surface here
+     (page #FBFCFD, muted #F6F8FA, card #FFF) — raw accent/highlight do not */
+  --accent-ink: #337687;
+  --highlight-ink: #0c7b66;
+
+  --navy: #0b1220;
+  --navy-foreground: #f8fafc;
+
+  --muted: oklch(0.96 0.006 260);
+  --muted-foreground: oklch(0.44 0.02 260);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.9 0.01 260);
+  --input: oklch(0.9 0.01 260);
+  --ring: var(--accent-ink);
+
+  --chart-1: var(--primary);
+  --chart-2: var(--secondary);
+  --chart-3: var(--accent);
+  --chart-4: var(--highlight);
+  --chart-5: oklch(0.44 0.02 260);
+
+  --radius: 0.75rem;
+
+  --sidebar: var(--navy);
+  --sidebar-foreground: var(--navy-foreground);
+  --sidebar-primary: var(--highlight);
+  --sidebar-primary-foreground: var(--navy);
+  --sidebar-accent: oklch(1 0 0 / 8%);
+  --sidebar-accent-foreground: var(--navy-foreground);
+  --sidebar-border: oklch(1 0 0 / 12%);
+  --sidebar-ring: var(--highlight);
+}
+
+.dark {
+  --background: #0b1220;
+  --foreground: #f8fafc;
+  --card: #101a2c;
+  --card-foreground: #f8fafc;
+  --popover: #101a2c;
+  --popover-foreground: #f8fafc;
+
+  --primary: #6c7ae0;
+  --primary-foreground: #0b1220;
+  --secondary: #5fa2cf;
+  --secondary-foreground: #0b1220;
+  --accent: #49a4bb;
+  --accent-foreground: #0b1220;
+  --highlight: #15d8b3;
+  --highlight-foreground: #0b1220;
+
+  --accent-ink: #7fd6e8;
+  --highlight-ink: #4be8c8;
+
+  --navy: #0b1220;
+  --navy-foreground: #f8fafc;
+
+  --muted: oklch(0.27 0.02 260);
+  --muted-foreground: oklch(0.72 0.02 260);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: var(--accent-ink);
+
+  --chart-1: var(--primary);
+  --chart-2: var(--secondary);
+  --chart-3: var(--accent);
+  --chart-4: var(--highlight);
+  --chart-5: oklch(0.72 0.02 260);
+
+  --sidebar: #0b1220;
+  --sidebar-foreground: #f8fafc;
+  --sidebar-primary: var(--highlight);
+  --sidebar-primary-foreground: #0b1220;
+  --sidebar-accent: oklch(1 0 0 / 8%);
+  --sidebar-accent-foreground: #f8fafc;
+  --sidebar-border: oklch(1 0 0 / 12%);
+  --sidebar-ring: var(--highlight);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .bg-brand-gradient {
+    background-image: linear-gradient(
+      135deg,
+      var(--primary) 0%,
+      var(--secondary) 55%,
+      var(--highlight) 100%
+    );
+  }
+
+  .bg-brand-gradient-radial {
+    background-image: radial-gradient(
+        circle at 15% 20%,
+        color-mix(in oklch, var(--highlight) 35%, transparent) 0%,
+        transparent 45%
+      ),
+      linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  }
+
+  .text-gradient-brand {
+    background-image: linear-gradient(90deg, var(--primary), var(--highlight-ink));
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+}
+
+@keyframes aurora {
+  0% {
+    background-position: 50% 50%, 50% 50%;
+  }
+  100% {
+    background-position: 350% 50%, 350% 50%;
+  }
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes orbit-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes node-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Hero visual motion — enhancement only, static and legible without it */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-orbit {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: orbit-spin linear infinite;
+  }
+
+  .hero-orbit-reverse {
+    animation-direction: reverse;
+  }
+
+  .hero-node {
+    animation: node-pulse 4s ease-in-out infinite;
+  }
+}
+
+/* Scroll-driven reveal: progressive enhancement only, no JS fallback needed */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal-on-scroll {
+      animation: reveal-up linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 35%;
+    }
+  }
+
+  @supports not (animation-timeline: view()) {
+    .reveal-on-scroll {
+      animation: var(--animate-reveal-up);
+      animation-timeline: auto;
+    }
+  }
+}
+
+/* Scroll-driven word highlight: words sit dimmed and fade up to full opacity
+   in sequence as the paragraph travels through the viewport. Progressive
+   enhancement, same contract as .reveal-on-scroll — without
+   `animation-timeline` support, or under reduced motion, every word renders at
+   full opacity, so the text can never get stuck unreadable. */
+@keyframes highlight-word {
+  to {
+    opacity: 1;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .scroll-highlight > span {
+      opacity: 0.28;
+      animation: highlight-word linear both;
+      animation-timeline: view();
+      animation-range: cover calc(var(--i) / var(--n) * 60% + 5%) cover
+        calc(var(--i) / var(--n) * 60% + 22%);
+    }
+  }
+
+  /* `?motion=on` preview. macOS exposes "Reduce motion" to every browser at
+     once and Safari/Chrome offer no per-browser override, so without this the
+     CSS-gated animations cannot be previewed at all on such a machine. The JS
+     override stamps data-motion on <html>; see MotionOverride. */
+  :root[data-motion="on"] .scroll-highlight > span {
+    opacity: 0.28;
+    animation: highlight-word linear both;
+    animation-timeline: view();
+    animation-range: cover calc(var(--i) / var(--n) * 60% + 5%) cover
+      calc(var(--i) / var(--n) * 60% + 22%);
+  }
+
+  :root[data-motion="on"] .reveal-on-scroll {
+    animation: reveal-up linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 35%;
+  }
+}
+
+/* Pinned reveal section.
+   On a viewport tall enough to hold the text, the track runs longer than the
+   screen and its inner block sticks just below the (h-16) header, so the
+   section holds still while the character reveal plays out. The next section
+   only appears once the track's scroll length is spent.
+
+   The reveal itself is defined first against the paragraph's own `view()`
+   timeline, and the pin only *overrides* the timeline. That ordering matters:
+   if the pin is off, the characters still have a timeline that works. Pointing
+   them at `--pin` unconditionally would leave them stuck at 0.22 opacity on
+   any viewport that does not pin.
+
+   The pin is skipped on short or very narrow viewports, where the paragraph is
+   taller than the sticky box would be and would get cut off. Everything sits
+   inside the support + reduced-motion gate, so without it the section is an
+   ordinary `py-44` block and nobody scrolls 260vh past static text. */
+@keyframes type-char {
+  to {
+    opacity: 1;
+  }
+}
+
+.pin-track {
+  --header-h: 4rem;
+}
+
+@supports (animation-timeline: view()) {
+  /* Baseline reveal — works whether or not the section pins. */
+  @media (prefers-reduced-motion: no-preference) {
+    .scroll-typewriter .tw-char {
+      opacity: 0.22;
+      animation: type-char linear both;
+      animation-timeline: view();
+      animation-range: cover calc(var(--i) / var(--n) * 55% + 8%) cover
+        calc(var(--i) / var(--n) * 55% + 20%);
+    }
+  }
+
+  :root[data-motion="on"] .scroll-typewriter .tw-char {
+    opacity: 0.22;
+    animation: type-char linear both;
+    animation-timeline: view();
+    animation-range: cover calc(var(--i) / var(--n) * 55% + 8%) cover
+      calc(var(--i) / var(--n) * 55% + 20%);
+  }
+
+  /* Pinned variant, only where the text fits the sticky box. */
+  @media (prefers-reduced-motion: no-preference) and (min-width: 380px) and (min-height: 700px) {
+    .pin-track {
+      height: 260vh;
+      padding-block: 0;
+      view-timeline-name: --pin;
+    }
+
+    .pin-track .pin-inner {
+      position: sticky;
+      top: var(--header-h);
+      display: flex;
+      align-items: center;
+      height: calc(100svh - var(--header-h));
+    }
+
+    .scroll-typewriter .tw-char {
+      animation-timeline: --pin;
+      animation-range: contain calc(var(--i) / var(--n) * 72%) contain
+        calc(var(--i) / var(--n) * 72% + 16%);
+    }
+  }
+
+  @media (min-width: 380px) and (min-height: 700px) {
+    :root[data-motion="on"] .pin-track {
+      height: 260vh;
+      padding-block: 0;
+      view-timeline-name: --pin;
+    }
+
+    :root[data-motion="on"] .pin-track .pin-inner {
+      position: sticky;
+      top: var(--header-h);
+      display: flex;
+      align-items: center;
+      height: calc(100svh - var(--header-h));
+    }
+
+    :root[data-motion="on"] .scroll-typewriter .tw-char {
+      animation-timeline: --pin;
+      animation-range: contain calc(var(--i) / var(--n) * 72%) contain
+        calc(var(--i) / var(--n) * 72% + 16%);
+    }
+  }
+}
+
+/* Pointer parallax for the project models. `--px`/`--py` are written by the
+   carousel's single delegated pointer listener; only `transform` changes, so
+   this stays on the compositor. Both properties default to 0, so a model with
+   no listener (reduced motion, no JS) simply sits flat. */
+.iso-parallax {
+  transform: perspective(760px) rotateX(calc(var(--py, 0) * -16deg))
+    rotateY(calc(var(--px, 0) * 20deg)) scale(1.02);
+  transition: transform 500ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .group:hover .iso-parallax {
+    transition-duration: 110ms;
+  }
 }
