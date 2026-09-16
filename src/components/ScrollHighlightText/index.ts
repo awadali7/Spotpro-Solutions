@@ -1,0 +1,1 @@
+export { ScrollHighlightText } from "./ScrollHighlightText";
