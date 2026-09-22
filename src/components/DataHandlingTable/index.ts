@@ -1,0 +1,1 @@
+export { DataHandlingTable } from "./DataHandlingTable";

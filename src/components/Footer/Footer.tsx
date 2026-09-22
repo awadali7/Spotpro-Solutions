@@ -2,13 +2,13 @@ import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import { Button } from "@/components/ui/button";
-import { nav, site } from "@/lib/content/site";
+import { nav, productRoutes, site } from "@/lib/content/site";
 
 export function Footer() {
   return (
     <footer className="bg-navy text-navy-foreground">
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
-        <div className="grid gap-10 md:grid-cols-[1.3fr_1fr_1fr]">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_1.1fr]">
           <div>
             <Logo onDark size="lg" />
             <p className="mt-4 max-w-sm text-sm text-white/70">
@@ -26,6 +26,24 @@ export function Footer() {
             </h2>
             <ul className="mt-4 space-y-2">
               {nav.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="focus-visible:ring-ring rounded text-sm text-white/80 transition-colors hover:text-highlight focus-visible:ring-2 focus-visible:outline-none"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h2 className="text-sm font-semibold tracking-wide text-white/60 uppercase">
+              Product
+            </h2>
+            <ul className="mt-4 space-y-2">
+              {productRoutes.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}

@@ -466,3 +466,15 @@
 :root[data-motion="on"] .meteor {
   animation: meteor 5s linear infinite;
 }
+
+/* The work carousel autoplays, so WCAG 2.2.2 requires a way to stop it. Under
+   reduced motion there is no autoplay to stop, so the toggle goes away — in
+   CSS rather than by unmounting it, so the control row does not reflow when
+   `useReducedMotion` resolves after hydration. `?motion=on` forces autoplay
+   back on, and the toggle has to come back with it, hence the data-motion
+   exception rather than a bare `motion-reduce:hidden`. */
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-motion="on"]) .autoplay-toggle {
+    display: none;
+  }
+}

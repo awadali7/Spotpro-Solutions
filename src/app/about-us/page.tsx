@@ -3,6 +3,7 @@ import { Compass, Target } from "lucide-react";
 import { PageHero } from "@/components/PageHero";
 import { RevealSection } from "@/components/RevealSection";
 import { SectionHeading } from "@/components/SectionHeading";
+import { Grid } from "@/components/ui/grid-pattern";
 import { CtaBand } from "@/components/CtaBand";
 import { NetworkGraphic } from "@/components/NetworkGraphic";
 import { coreValues, mission, vision, whoWeAre } from "@/lib/content/about";
@@ -70,16 +71,21 @@ export default function AboutPage() {
           {coreValues.map((value, index) => (
             <li
               key={value.title}
-              className="border-border bg-card hover:border-accent/50 rounded-2xl border p-6 transition-colors"
+              className="border-border from-muted to-card hover:border-accent/50 relative overflow-hidden rounded-3xl border bg-gradient-to-b p-6 transition-colors"
             >
+              {/* Deterministic per-card seed and a unique SVG id — see the
+                  notes in grid-pattern.tsx. */}
+              <Grid id={`core-value-${index}`} seed={index + 1} size={20} />
               <span
-                className="bg-brand-gradient font-heading inline-flex h-9 w-9 items-center justify-center rounded-lg text-sm font-semibold text-white"
+                className="bg-brand-gradient font-heading relative z-20 inline-flex h-9 w-9 items-center justify-center rounded-lg text-sm font-semibold text-white"
                 aria-hidden="true"
               >
                 {String(index + 1).padStart(2, "0")}
               </span>
-              <h3 className="font-heading mt-4 text-lg font-semibold">{value.title}</h3>
-              <p className="text-muted-foreground mt-2 text-sm text-pretty">
+              <h3 className="font-heading relative z-20 mt-4 text-lg font-semibold">
+                {value.title}
+              </h3>
+              <p className="text-muted-foreground relative z-20 mt-2 text-sm text-pretty">
                 {value.description}
               </p>
             </li>

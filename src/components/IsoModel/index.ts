@@ -1,1 +1,1 @@
-export { isoModels } from "./IsoModel";
+export { isoModels, Cuboid } from "./IsoModel";

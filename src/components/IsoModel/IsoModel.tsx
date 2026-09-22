@@ -56,7 +56,13 @@ function Defs({ id }: { id: string }) {
   );
 }
 
-function Cuboid({
+/**
+ * Exported so other brand artwork can compose from the same primitive rather
+ * than hand-plotting polygons. Note the tones are translucent glass tuned for
+ * the navy cards — on a light surface they are close to invisible, so anything
+ * reusing this needs to supply its own dark backdrop.
+ */
+export function Cuboid({
   cx,
   cy,
   w,
@@ -244,6 +250,22 @@ const Token = () => (
   </Frame>
 );
 
+/**
+ * Unical — a month plate under its header band, with the days you care about
+ * standing proud of the grid. Cuboid positions are derived from the plate's
+ * top face rather than eyeballed, so the blocks sit on the surface instead of
+ * floating above it; `fit` is the computed bounding box of all five.
+ */
+const Calendar = () => (
+  <Frame id="m-cal" fit={{ cx: 109, cy: 142, span: 149, base: 194, halfW: 74 }}>
+    <Cuboid cx={100} cy={100} w={96} d={76} h={8} tone="dim" />
+    <Cuboid cx={100} cy={96} w={96} d={12} h={4} tone="accent" />
+    <Cuboid cx={101.73} cy={91} w={16} d={16} h={22} tone="light" />
+    <Cuboid cx={125.98} cy={99} w={16} d={16} h={34} tone="accent" />
+    <Cuboid cx={80.95} cy={121} w={16} d={16} h={16} tone="light" />
+  </Frame>
+);
+
 export const isoModels: Record<ProjectModel, () => React.ReactElement> = {
   chat: Chat,
   retrieval: Retrieval,
@@ -253,4 +275,5 @@ export const isoModels: Record<ProjectModel, () => React.ReactElement> = {
   face: Face,
   chain: Chain,
   token: Token,
+  calendar: Calendar,
 };

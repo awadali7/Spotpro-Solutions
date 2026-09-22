@@ -6,7 +6,8 @@ export type ProjectModel =
     | "video"
     | "face"
     | "chain"
-    | "token";
+    | "token"
+    | "calendar";
 
 export type ProjectIcon =
     | "conversationalAi"
@@ -22,7 +23,10 @@ export const completedProjects: Array<{
     title: string;
     category: string;
     description: string;
-    icon: ProjectIcon;
+    /** Not rendered for completed projects — `WorkCarousel` keys the card
+     *  visual off `model`. Optional so an entry outside the AI categories
+     *  does not have to claim one. */
+    icon?: ProjectIcon;
     model: ProjectModel;
     /** Topic image in `public/projects`. Falls back to the isometric model when absent. */
     image?: string;
@@ -37,13 +41,12 @@ export const completedProjects: Array<{
         image: "/projects/rasa-chatbot.jpg",
     },
     {
-        title: "Calander App",
-        category: "Conversational AI",
+        title: "Unical",
+        category: "Our Product",
         description:
-            "Retrieval-augmented chatbot grounded in a private knowledge base, giving accurate, sourced answers.",
-        icon: "documentAi",
-        model: "retrieval",
-        image: "/projects/rag-chatbot.jpg",
+            "Our own calendar app. Every Google and Microsoft calendar in one place on your phone, with changes syncing back to both.",
+        model: "calendar",
+        image: "/projects/unical.jpg",
     },
     {
         title: "RAG Chatbot",

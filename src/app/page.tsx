@@ -101,12 +101,18 @@ export default function HomePage() {
         <div className="mt-12">
           <WorkCarousel />
         </div>
-        <div className="mt-10 text-center">
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-center">
           <Link
             href="/our-work"
             className="text-accent-ink inline-flex items-center gap-1 text-sm font-semibold hover:underline"
           >
             See all our work &rarr;
+          </Link>
+          <Link
+            href="/products/unical"
+            className="text-accent-ink inline-flex items-center gap-1 text-sm font-semibold hover:underline"
+          >
+            Meet Unical, our own product &rarr;
           </Link>
         </div>
       </RevealSection>
