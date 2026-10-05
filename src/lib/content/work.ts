@@ -38,7 +38,7 @@ export const completedProjects: Array<{
             "A production Rasa-based chatbot handling multi-turn conversations with intent recognition and CRM handoff.",
         icon: "conversationalAi",
         model: "chat",
-        image: "/projects/rasa-chatbot.jpg",
+        image: "https://spotpro-website-assets-392362834769-ap-south-2-an.s3.ap-south-2.amazonaws.com/spotpro-website/rasa-chatbot.jpg",
     },
     {
         title: "Unical",
@@ -46,7 +46,7 @@ export const completedProjects: Array<{
         description:
             "Our own calendar app. Every Google and Microsoft calendar in one place on your phone, with changes syncing back to both.",
         model: "calendar",
-        image: "/projects/unical.jpg",
+        image: "https://spotpro-website-assets-392362834769-ap-south-2-an.s3.ap-south-2.amazonaws.com/spotpro-website/unical.jpg",
     },
     {
         title: "RAG Chatbot",
@@ -55,7 +55,7 @@ export const completedProjects: Array<{
             "Retrieval-augmented chatbot grounded in a private knowledge base, giving accurate, sourced answers.",
         icon: "documentAi",
         model: "retrieval",
-        image: "/projects/rag-chatbot.jpg",
+        image: "https://spotpro-website-assets-392362834769-ap-south-2-an.s3.ap-south-2.amazonaws.com/spotpro-website/rag-chatbot.jpg",
     },
     {
         title: "Financial AI Analyst",
@@ -64,7 +64,7 @@ export const completedProjects: Array<{
             "An AI analyst that reads financial documents and market data to generate structured, reviewable insights.",
         icon: "dataAnalytics",
         model: "analyst",
-        image: "/projects/financial-analyst.jpg",
+        image: "https://spotpro-website-assets-392362834769-ap-south-2-an.s3.ap-south-2.amazonaws.com/spotpro-website/financial-analyst.jpg",
     },
     {
         title: "AI Travel Companion",
@@ -73,7 +73,7 @@ export const completedProjects: Array<{
             "A conversational planning assistant that builds itineraries and answers travel questions in real time.",
         icon: "conversationalAi",
         model: "travel",
-        image: "/projects/travel-companion.jpg",
+        image: "https://spotpro-website-assets-392362834769-ap-south-2-an.s3.ap-south-2.amazonaws.com/spotpro-website/travel-companion.jpg",
     },
     {
         title: "Video AI Summarizer",
@@ -82,7 +82,7 @@ export const completedProjects: Array<{
             "Automatically condenses long-form video into key moments and searchable text summaries.",
         icon: "computerVision",
         model: "video",
-        image: "/projects/video-summarizer.jpg",
+        image: "https://spotpro-website-assets-392362834769-ap-south-2-an.s3.ap-south-2.amazonaws.com/spotpro-website/video-summarizer.jpg",
     },
     {
         title: "Canteen Management (Face Recognition)",
@@ -91,7 +91,7 @@ export const completedProjects: Array<{
             "A face-recognition-based check-in and billing system for canteen management at scale.",
         icon: "computerVision",
         model: "face",
-        image: "/projects/canteen-management.jpg",
+        image: "https://spotpro-website-assets-392362834769-ap-south-2-an.s3.ap-south-2.amazonaws.com/spotpro-website/canteen-management.jpg",
     },
     {
         title: "Blockchain App Development",
@@ -100,7 +100,7 @@ export const completedProjects: Array<{
             "A full-stack blockchain application built for transparent, verifiable record-keeping.",
         icon: "blockchain",
         model: "chain",
-        image: "/projects/blockchain-app.jpg",
+        image: "https://spotpro-website-assets-392362834769-ap-south-2-an.s3.ap-south-2.amazonaws.com/spotpro-website/blockchain-app.jpg",
     },
     {
         title: "Document Tokenization System",
@@ -109,7 +109,7 @@ export const completedProjects: Array<{
             "A system for tokenizing documents on-chain, giving each one a verifiable, tamper-evident identity.",
         icon: "web3",
         model: "token",
-        image: "/projects/document-tokenization.jpg",
+        image: "https://spotpro-website-assets-392362834769-ap-south-2-an.s3.ap-south-2.amazonaws.com/spotpro-website/document-tokenization.jpg",
     },
 ];
 
